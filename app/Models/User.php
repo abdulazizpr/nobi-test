@@ -2,14 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Concerns\OldDateSerializer;
+use App\Models\Transaction;
+use App\Repositories\NetAssetRepository;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use OldDateSerializer;
+    use SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var string[]
+    */
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -18,26 +32,24 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
-        'password',
+        'username',
+        'total_unit',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function getTotalBalanceAttribute(): float
+    {
+        return round($this->current_nab * $this->total_unit, 4, PHP_ROUND_HALF_DOWN);
+    }
+
+    public function getCurrentNabAttribute(): float
+    {
+        $netAsset = app(NetAssetRepository::class)->getLastNetAsset();
+
+        return $netAsset->nab ?? 0;
+    }
 }
