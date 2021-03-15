@@ -38,10 +38,10 @@ class UsersController extends Controller
             ->paginate($limit, $select, $where, [], $appends, $orderBy, $sort);
 
         return new JsonResponse([
-            'code' => 201,
+            'code' => 200,
             'message' => 'The new user has been saved.',
             'result' => $result,
-        ], 201);
+        ], 200);
     }
 
     /**

@@ -37,9 +37,9 @@ class TopUpController extends Controller
         \DB::commit();
 
         return new JsonResponse([
-            'code' => 200,
+            'code' => 201,
             'message' => 'Top Up has been success.',
             'result' => $result,
-        ], 200);
+        ], 201);
     }
 }
