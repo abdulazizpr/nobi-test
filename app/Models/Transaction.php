@@ -38,6 +38,11 @@ class Transaction extends Model
         'total_balance',
     ];
 
+    /**
+     * Transaction belongs to User
+     *
+     * @return BelongsTo
+    */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

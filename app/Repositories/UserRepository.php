@@ -12,11 +12,11 @@ class UserRepository extends BaseRepository
         parent::__construct($model);
     }
 
-    public function find($userId)
-    {
-        return $this->model->find($userId);
-    }
-
+    /**
+     * Get Total Unit
+     *
+     * @return float
+    */
     public function getTotalUnit()
     {
         return $this->model->sum('total_unit');

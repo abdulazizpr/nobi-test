@@ -23,7 +23,7 @@ class UsersController extends Controller
         $where = [];
         $limit = $request->limit ?? 20;
 
-        $select = ['id', 'total_unit'];
+        $select = ['id as user_id', 'total_unit'];
         $appends = ['total_balance', 'current_nab'];
         $orderBy = 'id';
         $sort = 'ASC';

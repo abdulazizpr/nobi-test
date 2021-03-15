@@ -36,16 +36,31 @@ class User extends Authenticatable
         'total_unit',
     ];
 
+    /**
+     * User has many Transactions
+     *
+     * @return HasMany
+    */
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
     }
 
+    /**
+     * Get Total Balance Attribute
+     *
+     * @return float
+    */
     public function getTotalBalanceAttribute(): float
     {
         return round($this->current_nab * $this->total_unit, 4, PHP_ROUND_HALF_DOWN);
     }
 
+    /**
+     * Get Current Balance Attribute
+     *
+     * @return float
+    */
     public function getCurrentNabAttribute(): float
     {
         $netAsset = app(NetAssetRepository::class)->getLastNetAsset();

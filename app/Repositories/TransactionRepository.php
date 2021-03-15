@@ -14,6 +14,11 @@ class TransactionRepository extends BaseRepository
         parent::__construct($model);
     }
 
+    /**
+     * Create Transaction
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+    */
     public function create($request, $type = 'topup')
     {
         $netAssetRepo = app(NetAssetRepository::class);

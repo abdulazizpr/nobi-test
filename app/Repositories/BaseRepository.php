@@ -28,12 +28,27 @@ abstract class BaseRepository
      * be used by the repository.
      *
      * @return \Illuminate\Database\Eloquent\Model
-     */
+    */
     public function model()
     {
         return $this->model;
     }
 
+    /**
+     * Return object of model
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+    */
+    public function find($id)
+    {
+        return $this->model->find($id);
+    }
+
+    /**
+     * Get Result of pagination be used by the repository.
+     *
+     * @return LengthAwaraPagination
+    */
     public function paginate(
         $limit = 20,
         $select = '*',

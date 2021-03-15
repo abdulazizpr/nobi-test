@@ -12,6 +12,11 @@ class NetAssetRepository extends BaseRepository
         parent::__construct($model);
     }
 
+    /**
+     * Get Last Net Asset
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+    */
     public function getLastNetAsset()
     {
         return $this->model
@@ -19,6 +24,11 @@ class NetAssetRepository extends BaseRepository
             ->first();
     }
 
+    /**
+     * Update Balance
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+    */
     public function updateBalance($request)
     {
         $model = $this->model;
