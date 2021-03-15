@@ -9,9 +9,16 @@ use Illuminate\Http\JsonResponse;
 
 class UpdateBalanceController extends Controller
 {
+    /**
+     * Update Balance.
+     *
+     * @param \App\Http\Requests\UpdateBalanceRequest $request
+     *
+     * @return JsonResponse
+    */
     public function update(UpdateBalanceRequest $request) {
-        $netAssetRepo = app(NetAssetRepository::class);
-        $netAsset = $netAssetRepo->updateBalance($request);
+        $netAsset = app(NetAssetRepository::class)
+            ->updateBalance($request);
 
         return new JsonResponse([
             'code' => 200,

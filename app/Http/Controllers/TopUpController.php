@@ -10,13 +10,20 @@ use Throwable;
 
 class TopUpController extends Controller
 {
+    /**
+     * Create Top Up.
+     *
+     * @param \App\Http\Requests\TopUpRequest $request
+     *
+     * @return JsonResponse
+    */
     public function create(TopUpRequest $request)
     {
         \DB::beginTransaction();
 
-        $transactionRepo = app(TransactionRepository::class);
         try {
-            $result = $transactionRepo->create($request);
+            $result = app(TransactionRepository::class)
+                ->create($request);
         } catch (Throwable $e) {
             \DB::rollback();
 

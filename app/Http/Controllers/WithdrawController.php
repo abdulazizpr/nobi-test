@@ -11,14 +11,20 @@ use Throwable;
 
 class WithdrawController extends Controller
 {
+    /**
+     * Create Withdraw.
+     *
+     * @param \App\Http\Requests\WithdrawRequest $request
+     *
+     * @return JsonResponse
+    */
     public function create(WithdrawRequest $request)
     {
         \DB::beginTransaction();
 
-        $transactionRepo = app(TransactionRepository::class);
-
         try {
-            $result = $transactionRepo->create($request, Transaction::WITHDRAW);
+            $result = app(TransactionRepository::class)
+                ->create($request, Transaction::WITHDRAW);
         } catch (Throwable $e) {
             \DB::rollback();
 

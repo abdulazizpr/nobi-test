@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    /**
+     * Get User Member.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return JsonResponse
+    */
     public function index(Request $request)
     {
         $where = [];
@@ -37,6 +44,14 @@ class UsersController extends Controller
         ], 201);
     }
 
+    /**
+     * Create User.
+     *
+     * @param \App\Http\Requests\UserRequest $request
+     * @param \App\Models\User $user
+     *
+     * @return JsonResponse
+    */
     public function store(UserRequest $request, User $user)
     {
         $user->fill($request->only($user->offsetGet('fillable')));

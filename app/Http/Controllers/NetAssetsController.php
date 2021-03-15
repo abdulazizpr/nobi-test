@@ -9,13 +9,19 @@ use Illuminate\Http\Request;
 
 class NetAssetsController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Get Net Asset List.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return JsonResponse
+    */
+    public function index(Request $request): JsonResponse
     {
-        $netAssetRepo = app(NetAssetRepository::class);
-
         $limit = $request->limit ?? 20;
         $select = ['nab', 'created_at'];
-        $netAsset = $netAssetRepo->paginate($limit, $select);
+        $netAsset = app(NetAssetRepository::class)
+            ->paginate($limit, $select);
 
         return new JsonResponse([
             'code' => 200,
