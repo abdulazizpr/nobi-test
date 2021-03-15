@@ -11,4 +11,4 @@ For run this app:
 
 For import postman collection : [Click here](submission/NOBI_TEST.postman_collection.json).
 
-For import postman environment : [Click here](submission/NOBI_ENV.postman_environment.json) (you can change base url on your environtment).
+For import postman environment : [Click here](submission/NOBI_ENV.postman_environment.json) (you can change base url on your environment).
